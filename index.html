@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Tracker - Chrome Extension Demo</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⏱ Productivity Tracker</h1>
+            <p>Chrome Extension for Time Tracking & Analytics</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Extension Popup Simulation -->
+            <div class="extension-popup">
+                <div class="popup-header">
+                    <div class="icon">PT</div>
+                    <h3>Productivity Tracker</h3>
+                </div>
+
+                <div class="current-session">
+                    <div class="session-time" id="currentTime">00:23:15</div>
+                    <div class="session-site">github.com</div>
+                </div>
+
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-value productive">4h 32m</div>
+                        <div class="stat-label">Productive Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value unproductive">1h 45m</div>
+                        <div class="stat-label">Unproductive Today</div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="openDashboard()">📊 Dashboard</button>
+                    <button class="btn btn-secondary" onclick="toggleTracking()">⏸ Pause</button>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard">
+                <div class="dashboard-nav">
+                    <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+                    <button class="nav-tab" onclick="showTab('websites')">Websites</button>
+                    <button class="nav-tab" onclick="showTab('reports')">Reports</button>
+                </div>
+
+                <!-- Overview Tab -->
+                <div class="dashboard-content active" id="overview">
+                    <div class="weekly-report">
+                        <div class="report-title">Weekly Productivity Report</div>
+                        <div class="report-stats">
+                            <div class="report-stat">
+                                <div class="report-stat-value">72%</div>
+                                <div class="report-stat-label">Productivity Score</div>
+                            </div>
+                            <div class="report-stat">
+                                <div class="report-stat-value">42h</div>
+                                <div class="report-stat-label">Total Time</div>
+                            </div>
+                            <div class="report-stat">
+                                <div class="report-stat-value">+15%</div>
+                                <div class="report-stat-label">vs Last Week</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <svg class="progress-ring" viewBox="0 0 100 100">
+                                <circle class="progress-bg" cx="50" cy="50" r="45"></circle>
+                                <circle class="progress-fill" cx="50" cy="50" r="45"></circle>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Today's Productivity</div>
+                        <div class="productivity-bar">
+                            <div class="productivity-fill"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #6c757d;">
+                            <span>Unproductive</span>
+                            <span>Neutral</span>
+                            <span>Productive</span>
+                        </div>
+                    </div>
+
+                    <div class="insights">
+                        <h3 style="margin-bottom: 15px; color: #2c3e50;">💡 Insights</h3>
+                        <div class="insight-item">
+                            <div class="insight-icon insight-positive">📈</div>
+                            <div>
+                                <strong>Great Focus!</strong><br>
+                                <span style="color: #6c757d; font-size: 0.9rem;">You spent 85% more time on coding platforms this week</span>
+                            </div>
+                        </div>
+                        <div class="insight-item">
+                            <div class="insight-icon insight-negative">📱</div>
+                            <div>
+                                <strong>Social Media Alert</strong><br>
+                                <span style="color: #6c757d; font-size: 0.9rem;">Social media usage increased by 23% compared to last week</span>
+                            </div>
+                        </div>
+                        <div class="insight-item">
+                            <div class="insight-icon insight-neutral">⏰</div>
+                            <div>
+                                <strong>Peak Hours</strong><br>
+                                <span style="color: #6c757d; font-size: 0.9rem;">You're most productive between 10 AM - 12 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Websites Tab -->
+                <div class="dashboard-content" id="websites">
+                    <div class="chart-container">
+                        <div class="chart-title">Website Usage Today</div>
+                        <div class="website-list">
+                            <div class="website-item">
+                                <div class="website-info">
+                                    <div class="website-favicon">GH</div>
+                                    <div>
+                                        <div class="website-name">github.com</div>
+                                        <span class="category-badge productive-badge">Productive</span>
+                                    </div>
+                                </div>
+                                <div class="website-time">2h 45m</div>
+                            </div>
+                            <div class="website-item">
+                                <div class="website-info">
+                                    <div class="website-favicon">VS</div>
+                                    <div>
+                                        <div class="website-name">code.visualstudio.com</div>
+                                        <span class="category-badge productive-badge">Productive</span>
+                                    </div>
+                                </div>
+                                <div class="website-time">1h 32m</div>
+                            </div>
+                            <div class="website-item">
+                                <div class="website-info">
+                                    <div class="website-favicon">SO</div>
+                                    <div>
+                                        <div class="website-name">stackoverflow.com</div>
+                                        <span class="category-badge productive-badge">Productive</span>
+                                    </div>
+                                </div>
+                                <div class="website-time">58m</div>
+                            </div>
+                            <div class="website-item">
+                                <div class="website-info">
+                                    <div class="website-favicon">TW</div>
+                                    <div>
+                                        <div class="website-name">twitter.com</div>
+                                        <span class="category-badge unproductive-badge">Unproductive</span>
+                                    </div>
+                                </div>
+                                <div class="website-time">45m</div>
+                            </div>
+                            <div class="website-item">
+                                <div class="website-info">
+                                    <div class="website-favicon">YT</div>
+                                    <div>
+                                        <div class="website-name">youtube.com</div>
+                                        <span class="category-badge unproductive-badge">Unproductive</span>
+                                    </div>
+                                </div>
+                                <div class="website-time">32m</div>
+                            </div>
+                            <div class="website-item">
+                                <div class="website-info">
+                                    <div class="website-favicon">GM</div>
+                                    <div>
+                                        <div class="website-name">gmail.com</div>
+                                        <span class="category-badge neutral-badge">Neutral</span>
+                                    </div>
+                                </div>
+                                <div class="website-time">28m</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Tab -->
+                <div class="dashboard-content" id="reports">
+                    <div class="chart-container">
+                        <div class="chart-title">Weekly Breakdown</div>
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 20px;">
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #2c3e50;">Mon</div>
+                                <div style="font-size: 0.9rem; color: #27ae60; margin-top: 5px;">6h 30m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">75%</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #2c3e50;">Tue</div>
+                                <div style="font-size: 0.9rem; color: #27ae60; margin-top: 5px;">7h 15m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">82%</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #2c3e50;">Wed</div>
+                                <div style="font-size: 0.9rem; color: #27ae60; margin-top: 5px;">5h 45m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">68%</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #2c3e50;">Thu</div>
+                                <div style="font-size: 0.9rem; color: #27ae60; margin-top: 5px;">8h 20m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">89%</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #2c3e50;">Fri</div>
+                                <div style="font-size: 0.9rem; color: #27ae60; margin-top: 5px;">6h 10m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">71%</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #e9ecef; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #6c757d;">Sat</div>
+                                <div style="font-size: 0.9rem; color: #e74c3c; margin-top: 5px;">2h 30m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">35%</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #e9ecef; border-radius: 8px;">
+                                <div style="font-weight: bold; color: #6c757d;">Sun</div>
+                                <div style="font-size: 0.9rem; color: #e74c3c; margin-top: 5px;">1h 45m</div>
+                                <div style="font-size: 0.8rem; color: #6c757d;">28%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <div class="chart-title">Category Breakdown</div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                            <div style="text-align: center; padding: 20px;">
+                                <div style="font-size: 2rem; color: #27ae60; font-weight: bold;">65%</div>
+                                <div style="color: #27ae60; font-weight: 600; margin: 10px 0;">Productive</div>
+                                <div style="color: #6c757d; font-size: 0.9rem;">Development, Learning, Documentation</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px;">
+                                <div style="font-size: 2rem; color: #f39c12; font-weight: bold;">20%</div>
+                                <div style="color: #f39c12; font-weight: 600; margin: 10px 0;">Neutral</div>
+                                <div style="color: #6c757d; font-size: 0.9rem;">Email, News, Research</div>
+                            </div>
+                            <div style="text-align: center; padding: 20px;">
+                                <div style="font-size: 2rem; color: #e74c3c; font-weight: bold;">15%</div>
+                                <div style="color: #e74c3c; font-weight: 600; margin: 10px 0;">Unproductive</div>
+                                <div style="color: #6c757d; font-size: 0.9rem;">Social Media, Entertainment</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+
+</body>
+</html>
